@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio5</title>
+    <style>
+        body {
+            margin: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4; /* Cor de fundo geral */
+        }
+
+        .conteudo {
+            padding: 1em;
+            border: 1px solid #ddd;
+            margin-bottom: 1em;
+            background-color: #fff; /* Cor de fundo das divs de conteúdo */
+            border-radius: 5px; /* Borda arredondada para suavizar as arestas */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        }
+
+        #idiomas {
+            margin: 10px;
+            display: flex;
+            gap: 5px;
+            justify-content: flex-end;
+        }
+
+        #idiomas button {
+            padding: 5px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        #idiomas button:hover {
+            transform: scale(1.2);
+        }
+
+        #idiomas button img {
+            width: 30px;
+            height: auto;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="idiomas">
+        <button onclick="Escolher('it')"><img src="img/Flag-of-Italy.jpg"></button>
+        <button onclick="Escolher('ptbr')"><img src="img/Flag-of-Brazil.jpg"></button>
+        <button onclick="Escolher('es')"><img src="img/Flag-of-Spain.jpg"></button>
+        <button onclick="Escolher('gb')" id="img"><img src="img/Flag-United-Kingdom.jpg"></button>
+    </div>
+
+    <div class="conteudo" id="paragrafo1"></div>
+    <div class="conteudo" id="paragrafo2"></div>
+    <div class="conteudo" id="paragrafo3"></div>
+    <div class="conteudo" id="paragrafo4"></div>
+    <div class="conteudo" id="paragrafo5"></div>
+
+    <script>
+        function Escolher(idioma) {
+            fetch(`textos_${idioma}.json`)
+                .then(resposta => resposta.json())
+                .then(texto => {
+                    document.getElementById('paragrafo1').innerText = texto.paragrafo1
+                    document.getElementById('paragrafo2').innerText = texto.paragrafo2
+                    document.getElementById('paragrafo3').innerText = texto.paragrafo3
+                    document.getElementById('paragrafo4').innerText = texto.paragrafo4
+                    document.getElementById('paragrafo5').innerText = texto.paragrafo5
+                })
+                .catch(error => console.error('Erro buscando textos:', error))
+        }
+    </script>
+</body>
+
+</html>
